@@ -26,6 +26,7 @@ const MealItemForm = props => {
     return (
         <form className={classes.form} onSubmit={submitHandler}>
             <Input
+            // As this is not a custom component to use ref,ref is pass as argument from the input component down here. 
             ref={amountInputRef}
              label="Amount" 
              input={{
