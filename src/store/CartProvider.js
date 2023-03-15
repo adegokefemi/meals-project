@@ -4,33 +4,37 @@ import Cartcontext from './Cart-contex';
 
 const defaultCartState = {
     items: [],
-    totalAmount: 0
+    totalAmount: 0,
+    addItem:(item) => {},
+    removeItem:(id) => {},
 };
 
 const cartReducer = (state, action) => {
     if (action.type === 'ADD') {
         const updatedTotalAmount = 
         // React give initialState(state.totalAmount),which is updated on as shown below
-        state.totalAmount + action.item.price * action.item.amount;
+        state.totalAmount + (action.item.price * action.item.amount);
         
         // This check if item already exist in the cart and then get the index of the item(s) if it exit.
         // The findIndex then return the index of the item if it exist.
         const existingCartItemIndex = state.items.findIndex(
-        // This check if the item of the id in the array has the same item id added in the action dispatch,
+        // This check if the id of the item in the array is the same with the id of the item added in the action dispatch,
         // and return the index of the item if it exist.
             (item) => item.id === action.item.id
         );
 
-        // This will work if the item already exit otherwise it output null.
+        // This will work if the item already exit with the array of the item output otherwise it output null.
         const existingCartItem = state.items[existingCartItemIndex];
-        let updatedItems;
+
+        // item to be updated after getting all existing items, the initial is declare below(updatedItems).
+        let updatedItems = null;
         
         //if items(say sushi)already exist in the cart,this update the item and the amount instead of list same items.
         if(existingCartItem){
             const updatedItem = {
                 ...existingCartItem, amount:existingCartItem.amount + action.item.amount
             };
-        // updatedItems is the new array where the existing item is copy and updated.
+        // updatedItems is the new array, where the existing items is copy and updated.
             updatedItems = [...state.items];
             updatedItems[existingCartItemIndex] = updatedItem;
 
@@ -47,14 +51,20 @@ const cartReducer = (state, action) => {
     }
 
     if (action.type === 'REMOVE') {
+
         const existingCartItemIndex = state.items.findIndex(
             (item) => item.id === action.id
         );
         const existingItem = state.items[existingCartItemIndex];
+
         const updatedTotalAmount = state.totalAmount - existingItem.price;
+       
         let updatedItems;
+
+
         if(existingItem.amount === 1) {
             updatedItems = state.items.filter(item => item.id !== action.id);
+
         } else {
             const updatedItem = {...existingItem, amount:existingItem.amount - 1 };
             updatedItems = [...state.items];

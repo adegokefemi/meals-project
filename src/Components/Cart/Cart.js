@@ -28,7 +28,7 @@ const Cart = (props) => {
                name={item.name} 
                amount={item.amount} 
                price={item.price}
-            // .bind allow to pass the id of the item to remove and,item to be added.
+            //.bind allow to pass the id of the item to remove and,  item to be added.
                onAdd={cartItemAddHandler.bind(null, item.id)}
                onRemove={cartItemRemoveHandler.bind(null, item)}
                />

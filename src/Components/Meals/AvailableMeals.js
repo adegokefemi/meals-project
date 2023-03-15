@@ -1,4 +1,3 @@
-import {useState, useEffect} from 'react';
 import Card from '../UI/Card';
 import MealItem from './MealItem/MealItem';
 import classes from './AvailableMeals.module.css';
@@ -32,7 +31,7 @@ const DUMMY_MEALS = [
   ];
 
 const AvailableMeals = () => {
-    const [meals, setMeals] = useState(null);
+    // const [meals, setMeals] = useState(null);
     
     const MealsList =  DUMMY_MEALS.map((meal)=>  
     <MealItem 
@@ -57,9 +56,9 @@ const AvailableMeals = () => {
  return (
      <section className={classes.meals}>
         <Card>
-        <ul>
-         { MealsList }
-         </ul>
+          <ul>
+          { MealsList }
+          </ul>
         </Card>
      </section>
  );
