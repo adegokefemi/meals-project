@@ -31,6 +31,8 @@ const DUMMY_MEALS = [
   ];
 
 const AvailableMeals = () => {
+    // const [meals, setMeals] = useState(null);
+    
     const MealsList =  DUMMY_MEALS.map((meal)=>  
     <MealItem 
       key={meal.id}
@@ -39,13 +41,24 @@ const AvailableMeals = () => {
       description={meal.description} 
       price={meal.price}/>)
 
+    // useEffect(() => {
+    //     fetch('http://localhost:8000/DUMMY_MEALS')
+    //         .then(res =>  {
+    //             return res.json();
+    //         })
+    //         .then(data => {
+    //             // console.log(data);
+    //             setMeals(data)
+    //         })
+    // }, [])
+
 
  return (
      <section className={classes.meals}>
         <Card>
-        <ul>
-            {MealsList}
-         </ul>
+          <ul>
+          { MealsList }
+          </ul>
         </Card>
      </section>
  );
